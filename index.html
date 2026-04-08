@@ -1,12 +1,72 @@
 <!doctype html>
 <html lang="ja">
-  <head id="app-head">
+  <head>
+    <title>R.dev</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="R.dev の個人ブログサイトです。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="R.dev" />
+    <meta property="og:description" content="R.dev の個人ブログサイトです。" />
+    <meta property="og:image" content="https://github.com/mysite/ogp.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="R.dev" />
+    <meta name="twitter:description" content="R.dev の個人ブログサイトです。" />
+    <meta name="twitter:image" content="https://github.com/mysite/ogp.png" />
     <link rel="icon" type="image/svg+xml" href="/mysite/favicon.svg" />
-    <script type="module" crossorigin src="/mysite/assets/index-y3f9Eaam.js"></script>
-    <link rel="modulepreload" crossorigin href="/mysite/assets/preload-helper-c4JbMTJA.js">
-    <link rel="stylesheet" crossorigin href="/mysite/assets/preload-helper-nujaw0R-.css">
+    <link rel="stylesheet" crossorigin href="/mysite/assets/post-list-nujaw0R-.css">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+    <header>
+      <a href="/mysite/" aria-label="Home">
+        <img src="/mysite/favicon.svg" alt="アイコン画像" />
+      </a>
+      <nav>
+        <ul>
+          <a href="/mysite/pages/posts/"><li>POST</li></a>
+        </ul>
+      </nav>
+    </header>
+    <main class="site-shell">
+      <div class="section-list">
+        <section class="section-card">
+          <p class="card-title">About</p>
+          <div class="card-header">
+            <h2>R.dev</h2>
+            <ul class="social-links" aria-label="SNS links">
+              <li>
+                <a href="https://x.com/rui__19" target="_blank" rel="noreferrer" aria-label="X">
+                  <img src="/mysite/icons/x.svg" alt="" width="20" height="20" />
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/r-dev95" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <img src="/mysite/icons/github.svg" alt="" width="20" height="20" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="card-text">ソフトウェアエンジニア (python, C, C++)</p>
+            <p class="card-text">最近はWeb周りの技術を学習中です。</p>
+          </div>
+        </section>
+        <section class="section-card" aria-labelledby="post-heading">
+          <p class="card-title">Post</p>
+          <div class="card-header">
+            <h2 id="post-heading">最新の投稿</h2>
+            <a class="card-link" href="/mysite/pages/posts/">もっと見る</a>
+          </div>
+          <ul class="post-list" data-post-list="latest">
+            <li class="post-empty">まだ投稿がありません</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>Copyright &copy; R.dev All Rights Reserved.</p>
+    </footer>
+    </div>
   </body>
 </html>
