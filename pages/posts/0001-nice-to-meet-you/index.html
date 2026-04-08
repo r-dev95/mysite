@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>はじめまして。静的な個人ブログサイトを作りました | R.dev</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web初心者が静的な個人ブログサイトをVite + vanilla JSで構築した話です。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="はじめまして。静的な個人ブログサイトを作りました | R.dev" />
+    <meta property="og:description" content="Web初心者が静的な個人ブログサイトをVite + vanilla JSで構築した話です。" />
+    <meta property="og:image" content="https://github.com/mysite/pages/posts/0001-nice-to-meet-you/ogp-post.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="はじめまして。静的な個人ブログサイトを作りました | R.dev" />
+    <meta name="twitter:description" content="Web初心者が静的な個人ブログサイトをVite + vanilla JSで構築した話です。" />
+    <meta name="twitter:image" content="https://github.com/mysite/pages/posts/0001-nice-to-meet-you/ogp-post.png" />
+    <link rel="icon" type="image/svg+xml" href="/mysite/favicon.svg" />
+    <link rel="stylesheet" crossorigin href="/mysite/assets/0001-nice-to-meet-you-InCf4qGg.css">
+    <link rel="stylesheet" crossorigin href="/mysite/assets/components-XSGCsMab.css">
+  </head>
+  <body>
+    <header>
+      <a href="/mysite/" aria-label="Home">
+        <img src="/mysite/favicon.svg" alt="アイコン画像" />
+      </a>
+      <nav>
+        <ul>
+          <a href="/mysite/pages/posts/"><li>POST</li></a>
+        </ul>
+      </nav>
+    </header>
+    <main class="site-shell">
+      <div class="section-list">
+        <div class="post-detail-actions">
+          <a class="card-link" href="/mysite/pages/posts/">一覧へ戻る</a>
+          <div class="post-navigation">
+            <a class="card-link disabled" href="/mysite/pages/posts/">前の記事</a>
+            <a class="card-link disabled" href="/mysite/pages/posts/">次の記事</a>
+          </div>
+        </div>
+        <section class="section-card post-detail">
+          <p class="card-title">Post</p>
+          <h1 class="card-heading">はじめまして。静的な個人ブログサイトを作りました</h1>
+          <ul class="post-meta-list">
+            <li>作成日: <time datetime="2026-04-08T14:26:36.544Z">2026.04.08</time></li>
+          </ul>
+          <ul class="tag-list">
+            <li class="tag-chip">tech</li><li class="tag-chip">github</li>
+          </ul>
+          <div class="card-separator"></div>
+          <div class="post-body">
+            <p>はじめまして。
+Web技術を学ぶために、静的な個人ブログサイトを作りました。</p>
+<p>これまでに TypeScript、React、Next.js、Tailwind CSS、shadcn など、いわゆるモダンで流行りの技術に触れたことはありました。実際、見た目が整ったものや、ひとまず動くものを作ること自体はできていました。</p>
+<p>ただ、その一方で「自分はいま何をフレームワークに助けられていて、何がWebの基礎そのものなのか」をきちんと理解できているかというと、あまり自信がありませんでした。</p>
+<p>特に、JavaScript、HTML、CSS の理解が浅いままだと、</p>
+<ul>
+<li>どこまでがモダンな技術の独自要素なのか</li>
+<li>その技術が何を楽にしてくれているのか</li>
+<li>そもそも何がうれしいのか</li>
+</ul>
+<p>が、感覚としてつかみにくいと感じました。</p>
+<p>そこで今回は、いったん基礎から学習しなおすつもりで、最初から大きな仕組みを入れすぎず、まずは自分で理解しながら作れる構成にしたいと考えました。そこで今回は、<strong>Vite + Vanilla JS</strong> を使って、できるだけシンプルに、でも実際の運用まで見据えたブログサイトを組み立てています。</p>
+<p>この記事では、最初の投稿として</p>
+<ul>
+<li>なぜ静的サイトにしたのか</li>
+<li>どんな機能を実装したのか</li>
+<li>どんな技術構成にしたのか</li>
+<li>作ってみて感じたこと</li>
+<li>今後どんな形で作り直してみたいか</li>
+</ul>
+<p>をまとめてみます。</p>
+<h2>なぜ静的サイトにしたのか</h2>
+<p>今回、まず大事にしたかったのは「自分で把握できる範囲で安全に作ること」でした。</p>
+<p>Webアプリにはログイン、データベース、フォーム送信、API通信など、学ぶと面白そうな要素がたくさんあります。ただ、初心者の段階でそれらを一気に扱うと、仕組みを理解する前に複雑さだけが増えてしまいそうだと感じました。</p>
+<p>そこで最初のブログは、サーバーサイドの処理を持たない<strong>静的サイト</strong>として構築しました。静的サイトであれば、攻撃対象になりやすい要素をかなり減らせますし、配信もシンプルになります。もちろん静的サイトだから絶対安全というわけではありませんが、少なくとも最初の学習対象としてはとても扱いやすい選択だったと思っています。</p>
+<p>また、HTML・CSS・JavaScript の基本を自分の手で触って理解したかったので、あえてフレームワークに頼りすぎず、Vanilla JS で組んでみました。</p>
+<h2>今回のサイトで実装したこと</h2>
+<p>見た目はシンプルなブログですが、中ではいくつかの機能を自作しています。</p>
+<h3>1. トップページ</h3>
+<p>トップページには、自己紹介用の <code>About</code> セクションと、最新記事を表示する <code>Post</code> セクションを用意しました。</p>
+<p><code>Post</code> セクションには新しい記事を最大3件表示するようにしていて、一覧ページへの導線も置いています。個人サイトらしく、SNS へのリンクもヘッダーやトップページからたどれるようにしています。</p>
+<h3>2. 記事一覧ページ</h3>
+<p>記事一覧ページでは、投稿済みの記事をまとめて確認できます。</p>
+<p>実装としては、ビルド時に生成した記事データをもとに一覧を表示していて、<strong>タグによる絞り込み</strong>もできるようにしました。タグの切り替えはクライアントサイドの JavaScript で動かしていて、静的サイトのままでも少しインタラクティブな操作ができるようになっています。</p>
+<h3>3. 記事詳細ページ</h3>
+<p>各記事には個別ページを用意しています。</p>
+<p>記事詳細ページでは、以下のような情報を表示しています。</p>
+<ul>
+<li>タイトル</li>
+<li>投稿日</li>
+<li>タグ</li>
+<li>本文</li>
+<li>前後の記事への移動リンク</li>
+<li>X 共有リンク</li>
+</ul>
+<p>単に Markdown を表示するだけでなく、ブログとして最低限使いやすい導線も意識しました。</p>
+<h3>4. Markdown から記事ページを生成</h3>
+<p>記事は Markdown で書けるようにしています。</p>
+<p>各記事は <code>content/posts/&#x3C;slug>/index.md</code> のような構成で管理し、ビルド時に</p>
+<ul>
+<li>トップページ</li>
+<li>記事一覧ページ</li>
+<li>各記事の詳細ページ</li>
+<li>記事一覧用の JSON データ</li>
+</ul>
+<p>をまとめて生成する仕組みにしています。</p>
+<p>記事本文の変換には <code>gray-matter</code>、<code>remark</code>、<code>rehype</code> を使っていて、Markdown の frontmatter からタイトルや概要、タグ、投稿日などを扱えるようにしています。さらに、コードブロックには <code>Shiki</code> を使ってシンタックスハイライトも入れました。</p>
+<h3>5. 記事ごとの OGP 画像生成</h3>
+<p>各記事ページごとに、記事タイトルを使った<strong>OGP画像を自動生成</strong>する仕組みを入れています。テンプレート画像にタイトル文字を合成して、SNS 共有時に記事ごとの見た目が変わるようにしました。</p>
+<h2>技術構成</h2>
+<p>今回の主な構成は次のようになっています。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ビルドツール</td>
+<td><code>Vite</code></td>
+</tr>
+<tr>
+<td>フロントエンド</td>
+<td><code>Vanilla JS</code></td>
+</tr>
+<tr>
+<td>記事管理</td>
+<td><code>Markdown</code></td>
+</tr>
+<tr>
+<td>Markdown処理</td>
+<td><code>gray-matter</code> / <code>remark</code> / <code>rehype</code></td>
+</tr>
+<tr>
+<td>コードハイライト</td>
+<td><code>Shiki</code></td>
+</tr>
+<tr>
+<td>OGP画像生成</td>
+<td><code>sharp</code></td>
+</tr>
+<tr>
+<td>テスト</td>
+<td><code>Vitest</code> + <code>jsdom</code></td>
+</tr>
+<tr>
+<td>ホスティング</td>
+<td><code>GitHub Pages</code></td>
+</tr>
+</tbody>
+</table>
+<p>フロントエンドはかなり素朴な構成ですが、そのぶん「何がどこで動いているのか」を追いやすいのがよかったです。</p>
+<p>CSS も分割して管理していて、全体の土台、レイアウト、共通コンポーネント、記事一覧、記事詳細、本文表示というように役割ごとに整理しています。大きなライブラリに頼らず、少しずつ積み上げていく練習にもなりました。</p>
+<h2>公開フローと運用</h2>
+<p>今回、個人的にこだわったポイントのひとつが公開フローです。</p>
+<p>ソースコード本体は<strong>プライベートリポジトリ</strong>で管理し、実際に公開するビルド結果は<strong>パブリックリポジトリ</strong>で管理するようにしました。GitHub Pages で公開したかったので、GitHub Actions を使って CI/CD も組んでいます。</p>
+<p>流れとしては、プライベートリポジトリの <code>main</code> に push すると、</p>
+<ol>
+<li>依存関係をインストール</li>
+<li>記事ページや OGP 画像を生成</li>
+<li>サイト全体をビルド</li>
+<li>パブリックリポジトリへ成果物を同期</li>
+<li>GitHub Pages 側に公開</li>
+</ol>
+<p>という形でデプロイされます。</p>
+<p>「ソースは公開しすぎたくないけれど、成果物は公開したい」という形を自分で組んでみたかったので、ここはかなり勉強になりました。</p>
+<h2>テストも入れてみた</h2>
+<p>まだ学習中ではありますが、今回は<strong>テストもなるべく書く</strong>ようにしてみました。</p>
+<p>具体的には、</p>
+<ul>
+<li>Markdown の変換処理</li>
+<li>記事一覧の描画</li>
+<li>記事詳細ページの描画</li>
+<li>タグ絞り込み</li>
+<li>OGP 画像生成まわり</li>
+<li>補助的なユーティリティ処理</li>
+</ul>
+<p>などに対して、Vitest と jsdom を使ったテストを用意しています。</p>
+<p>個人開発でここまでやる必要があるかは人それぞれだと思いますが、今回は「あとで安心して触れる状態を作ること」も学習の一部だと考えました。実際、ちょっとした修正でもテストがあると気持ちがかなり楽になります。</p>
+<h2>作ってみて感じたこと</h2>
+<p>今回いちばん大きかったのは、<strong>シンプルな技術だけでも、思っていたよりちゃんとブログらしいものが作れる</strong>と実感できたことです。</p>
+<p>最初は「Vanilla JS だけだとかなり大変なのでは」と思っていましたが、</p>
+<ul>
+<li>自分で理解しながら進めやすい</li>
+<li>どこでHTMLを作っているかが見えやすい</li>
+<li>ビルド処理の流れを学びやすい</li>
+<li>後から設計を見直しやすい</li>
+</ul>
+<p>という点で、初心者の自分にはかなり合っていました。</p>
+<p>一方で、作っていく中で「ここはもっとモダンな技術を使うと楽になりそう」と感じる場面もたくさんありました。テンプレート管理、コンポーネントの再利用、スタイル設計、記事周りの構成などは、今後さらに学んでいきたい部分です。</p>
+<h2>今後やってみたいこと</h2>
+<p>次のステップとしては、<strong>Astro や Tailwind CSS を使ってブログを再構築してみたい</strong>と思っています。</p>
+<p>Astro はコンテンツサイトとの相性が良さそうですし、コンポーネントベースで整理しやすそうなので、今回自作した仕組みと比べながら学べそうだと感じています。Tailwind CSS についても、ユーティリティファーストな書き方を一度しっかり触ってみたいです。</p>
+<p>今回のブログは、完成版というよりも「自分が次に進むための土台」だと思っています。</p>
+<p>まずは Vite + Vanilla JS で、静的サイトの構成、Markdown からのページ生成、デプロイ、自動化、テストまで一通り体験できました。次はそこから一歩進んで、より保守しやすく、より表現しやすい構成に挑戦していきたいです。</p>
+<h2>おわりに</h2>
+<p>Web初心者の自分にとって、今回のブログ制作は「ページを作る」だけでなく、</p>
+<ul>
+<li>構成を考える</li>
+<li>安全性を意識する</li>
+<li>公開方法を設計する</li>
+<li>自動化する</li>
+<li>継続しやすい形を考える</li>
+</ul>
+<p>ところまで含めて、とても良い学習になりました。</p>
+<p>まだまだ改善したいところはたくさんありますが、まずは自分の手でここまで形にできたことを素直にうれしく思っています。</p>
+<p>これからこのブログでは、Web 技術の学習メモや制作記録、試したこと、つまずいたことなどを少しずつ残していく予定です。</p>
+<p>もし同じように「まずはシンプルな静的サイトから始めてみたい」と考えている方がいたら、この記録が少しでも参考になればうれしいです。</p>
+          </div>
+        </section>
+        <div class="post-detail-footer">
+          <div class="post-detail-actions">
+            <a class="card-link" href="/mysite/pages/posts/">一覧へ戻る</a>
+            <div class="post-navigation">
+              <a class="card-link disabled" href="/mysite/pages/posts/">前の記事</a>
+              <a class="card-link disabled" href="/mysite/pages/posts/">次の記事</a>
+            </div>
+          </div>
+          <ul class="social-links" aria-label="共有リンク">
+            <li>
+              <a
+                href="https://x.com/intent/post?text=%E3%81%AF%E3%81%98%E3%82%81%E3%81%BE%E3%81%97%E3%81%A6%E3%80%82%E9%9D%99%E7%9A%84%E3%81%AA%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F&url=https%3A%2F%2Fgithub.com%2Fmysite%2Fpages%2Fposts%2F0001-nice-to-meet-you"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X で共有"
+              >
+                <img src="/mysite/icons/x.svg" alt="" width="20" height="20" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Copyright &copy; R.dev All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
