@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>このサイトのUIとOGP画像を修正しました | R.dev</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="このサイトのUIと、ブログ詳細ページ用のOGP画像の文字化けを修正した内容と反省点をまとめました。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="このサイトのUIとOGP画像を修正しました | R.dev" />
+    <meta property="og:description" content="このサイトのUIと、ブログ詳細ページ用のOGP画像の文字化けを修正した内容と反省点をまとめました。" />
+    <meta property="og:image" content="https://r-dev95.github.io/mysite/pages/posts/0002-change-mysite-ui/ogp-post.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="このサイトのUIとOGP画像を修正しました | R.dev" />
+    <meta name="twitter:description" content="このサイトのUIと、ブログ詳細ページ用のOGP画像の文字化けを修正した内容と反省点をまとめました。" />
+    <meta name="twitter:image" content="https://r-dev95.github.io/mysite/pages/posts/0002-change-mysite-ui/ogp-post.png" />
+    <link rel="icon" type="image/svg+xml" href="/mysite/favicon.svg" />
+    <link rel="stylesheet" crossorigin href="/mysite/assets/components-CVMkYKS_.css">
+    <link rel="stylesheet" crossorigin href="/mysite/assets/post-body-D8Ip89vW.css">
+  </head>
+  <body>
+    <header>
+      <a href="/mysite/" aria-label="Home">
+        <img src="/mysite/favicon.svg" alt="アイコン画像" />
+      </a>
+      <nav>
+        <ul>
+          <a href="/mysite/pages/posts/"><li>POST</li></a>
+        </ul>
+      </nav>
+    </header>
+    <main class="site-shell">
+      <div class="section-list">
+        <div class="post-detail-actions">
+          <a class="card-link" href="/mysite/pages/posts/">一覧へ戻る</a>
+          <div class="post-navigation">
+            <a class="card-link disabled" href="/mysite/pages/posts/">前の記事</a>
+            <a class="card-link" href="/mysite/pages/posts/0001-nice-to-meet-you/">次の記事</a>
+          </div>
+        </div>
+        <section class="section-card post-detail">
+          <p class="card-title">Post</p>
+          <h1 class="card-heading">このサイトのUIとOGP画像を修正しました</h1>
+          <ul class="post-meta-list">
+            <li>作成日: <time datetime="2026-04-09T05:15:55.432Z">2026.04.09</time></li>
+          </ul>
+          <ul class="tag-list">
+            <li class="tag-chip">tech</li>
+          </ul>
+          <div class="card-separator"></div>
+          <div class="post-body">
+            <p>このサイトの UI と OGP 画像について、気になっていた部分を修正したので、作業内容とあわせて反省点もまとめておきます。</p>
+<h2>UIの修正</h2>
+<h3>記事リンクカードのタイトル表示</h3>
+<p>記事リンクカードは、タイトルが長くなると折り返さず省略するようにしていました。そのため視聴端末によっては幅が狭く、タイトルの半分も見えないような状態でした。</p>
+<p><img src="/mysite/assets/card-DxyHFjU-.jpg" alt="修正前のカードリンク"></p>
+<p>そこで、長いタイトルが入っても2行分は見られるように表示を調整しました。</p>
+<p><img src="/mysite/assets/card-fixed-B1eZCNbZ.jpg" alt="修正後のカードリンク"></p>
+<h3>ページ移動ボタンの見た目</h3>
+<p>記事詳細ページの前後移動ボタンも、最初は状態の違いが少し分かりにくい見た目になっていました。</p>
+<p><img src="/mysite/assets/btn-DxesF9Dg.jpg" alt="修正前のボタン"></p>
+<p>特に、移動できないときのボタンが通常時とあまり変わらず、押せるのか押せないのかが伝わりにくかったため、<code>disabled</code> 相当の状態が見た目でも分かるように調整しました。</p>
+<p><img src="/mysite/assets/btn-fixed-DbmqKGdq.jpg" alt="修正後のボタン"></p>
+<h2>OGP画像の修正</h2>
+<p>ブログ詳細ページ用の OGP 画像はローカルでは問題なく生成できていたのですが、GitHub Actions を使って Ubuntu 上でビルドしたときに文字化けしてしまう問題がありました。</p>
+<p>調べてみると、原因はビルド環境ごとのフォント差分でした。Windows では表示できていても、Ubuntu 側では同じフォントが使えず、日本語の描画が崩れていました。</p>
+<p>そのため、Ubuntu 上でも利用できる日本語フォントを使うように見直し、GitHub Actions 側でもフォントをインストールするよう修正しました。</p>
+<h2>まとめ</h2>
+<p>今回の修正を通して、いくつか反省点がありました。</p>
+<ul>
+<li>短いタイトルや限られた表示パターンだけで確認すると、実際の運用で崩れるポイントを見落としやすい</li>
+<li>ボタンやリンクは、動くだけでなく状態が見た目で伝わることも大事</li>
+<li>ローカルで問題がなくても、CI や本番に近い環境では別の問題が起きることがある</li>
+<li>見た目に関する機能でも、環境依存やフォント差分まで考える必要がある</li>
+</ul>
+<p>UI を整える作業は見た目の微調整に見えますが、実際には使いやすさや保守性にも関わる部分だとあらためて感じました。</p>
+<p>今後は、作ったあとにすぐ公開するのではなく、</p>
+<ul>
+<li>長いタイトルや例外的なデータでも確認する</li>
+<li>状態違いを含めて UI を見る</li>
+<li>ローカルだけでなく CI 環境でも確認する</li>
+</ul>
+<p>といった流れを、最初から意識して進めていきたいです。</p>
+          </div>
+        </section>
+        <div class="post-detail-footer">
+          <div class="post-detail-actions">
+            <a class="card-link" href="/mysite/pages/posts/">一覧へ戻る</a>
+            <div class="post-navigation">
+              <a class="card-link disabled" href="/mysite/pages/posts/">前の記事</a>
+              <a class="card-link" href="/mysite/pages/posts/0001-nice-to-meet-you/">次の記事</a>
+            </div>
+          </div>
+          <ul class="social-links" aria-label="共有リンク">
+            <li>
+              <a
+                href="https://x.com/intent/post?text=%E3%81%93%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AEUI%E3%81%A8OGP%E7%94%BB%E5%83%8F%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F&url=https%3A%2F%2Fr-dev95.github.io%2Fmysite%2Fpages%2Fposts%2F0002-change-mysite-ui"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X で共有"
+              >
+                <img src="/mysite/icons/x.svg" alt="" width="20" height="20" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Copyright &copy; R.dev All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
