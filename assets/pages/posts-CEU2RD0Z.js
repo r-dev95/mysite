@@ -1,10 +1,8 @@
 /* empty css                    *//* empty css                   */(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e={site:{title:`R.dev`,copyright:`Copyright &copy; R.dev All Rights Reserved.`,basePath:`/mysite`},routes:{posts:`/mysite/pages/posts`},paths:{contentPostsDir:`content/posts`,generatedPostsJson:`generated/posts/index.json`,generatedPostsDir:`generated/posts`,postPagesDir:`src/pages/posts`,postOgpDir:`public/pages/posts`,ogpPostTemplate:`scripts/ogp-post.png`},files:{postSource:`index.md`,htmlEntry:`index.html`,ogp:`ogp.png`,postOgp:`ogp-post.png`}};function t(e){return e?new Intl.DateTimeFormat(`ja-JP`,{year:`numeric`,month:`2-digit`,day:`2-digit`}).format(new Date(e)).replaceAll(`/`,`.`):``}function n(e,n){return n.length===0?`<li class="post-empty">まだ投稿がありません</li>`:n.map(n=>{let r=(n.tags??[]).map(e=>`<li class="tag-chip">${e}</li>`).join(``);return`
           <li class="post-card" data-tags="${n.tags?.join(` `)}">
             <a href="${e.routes.posts}/${n.slug}/">
-              <div class="post-card-header">
-                <h3>${n.title}</h3>
-                <time datetime="${n.createdAt??``}">${t(n.createdAt)}</time>
-              </div>
+              <time datetime="${n.createdAt??``}">${t(n.createdAt)}</time>
+              <h3>${n.title}</h3>
               <ul class="tag-list post-card-tags">${r}</ul>
             </a>
           </li>`}).join(`
